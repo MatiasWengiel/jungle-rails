@@ -1,7 +1,7 @@
 class CartsController < ApplicationController
 
   def show
-    if !@cart
+    if cookies[:cart] == '{}'
       render 'empty_cart'
     end
   end
