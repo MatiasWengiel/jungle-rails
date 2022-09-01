@@ -1,0 +1,11 @@
+.card-area {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 3rem;
+
+  .card {
+    a {
+      background-color: green;
+    }
+  }
+}

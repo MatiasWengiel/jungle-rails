@@ -1,2 +1,21 @@
-<h1>Admin::Dashboard#show</h1>
-<p>Find me in app/views/admin/dashboard/show.html.erb</p>
+<h1>Admin Dashboard:</h1>
+<div class="card-area">
+  <div class="card shadow" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">Categories count:</h5>
+      <p class="card-text"><%= @categoriesCount %></p>
+      <a href="/categories/1" class="btn btn-primary">Evergreens</a>
+      <a href="/categories/2" class="btn btn-primary">Shrubs</a>
+      <a href="/categories/3" class="btn btn-primary">Trees</a>
+    </div>
+  </div>
+
+  <div class="shadow card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">Product count:</h5>
+      <p class="card-text"><%= @productsCount %></p>
+      <a href="/admin/products" class="btn btn-primary">See Products List (admin)</a>
+
+    </div>
+  </div>
+</div>
