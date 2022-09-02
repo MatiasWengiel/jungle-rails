@@ -4,14 +4,43 @@
     <h1>Sign Up Here:</h1>
   </header>
 
-  <%= form_for @user do |f| %>
-    <%= f.label :email %>
-    <%= f.text_field :email, placeholder: "Email" %>
-    <%= f.label :password %>
-    <%= f.password_field :password, placeholder: "Password" %>
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation, placeholder: "Confirm Password" %>
-    <%= f.submit "Create Account" %>
-  <% end %>
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-1">
+      <%= form_for [@user] do |form| %>
+
+        <% if form.object.errors.any? %>
+          <div class="alert alert-danger">
+            <strong>The following errors prevented saving:</strong>
+            <ul>
+              <% form.object.errors.full_messages.each do |error| %>
+                <li><%= error %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="form-group">
+          <%= form.label :email %>
+          <%= form.text_field :email, class: 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :password %>
+          <%= form.text_field :password, class: 'form-control' %>
+        </div>
+
+
+        <div class="form-group">
+          <%= form.label :password_confirmation %>
+          <%= form.text_field :password_confirmation, class: 'form-control' %>
+        </div>
+
+        <%= form.submit 'Submit', class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+
+</section>
+
 
 </section>
