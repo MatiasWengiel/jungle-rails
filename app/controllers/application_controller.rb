@@ -46,4 +46,15 @@ class ApplicationController < ActionController::Base
   end
   helper_method :purchase_list_total
 
+  def current_user
+    if session[:user_id]
+      @user = User.find(session[:user_id])
+    end
+  end
+  helper_method :current_user
+
+  def logged_in?
+    !!current_user
+  end
+  
 end
