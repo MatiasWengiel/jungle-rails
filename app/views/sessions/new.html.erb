@@ -6,16 +6,16 @@
 
 <div class="row">
     <div class="col-sm-6 col-sm-offset-1">
-      <%= form_with url: '/sessions', method: :post do |form| %>
+      <%= form_with model: @session_validation, url: '/sessions', method: :post do |form| %>
 
         <div class="form-group">
           <%= form.label :email %>
-          <%= form.text_field :email, class: 'form-control' %>
+          <%= form.email_field :email, class: 'form-control' %>
         </div>
 
         <div class="form-group">
           <%= form.label :password %>
-          <%= form.text_field :password, class: 'form-control' %>
+          <%= form.password_field :password, class: 'form-control' %>
         </div>
 
         <%= form.submit 'Submit', class: 'btn btn-primary' %>
