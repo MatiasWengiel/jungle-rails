@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def new
-    if :current_user
+    if session[:user_id]
       redirect_to '/'
     end
     @user = User.new
@@ -24,6 +24,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :last_name, :email, :password, :password_confirmation)
   end
 end
