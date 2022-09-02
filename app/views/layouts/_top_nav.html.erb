@@ -66,11 +66,14 @@
         </li>
       </ul>
     </div>
-    <% if current_user %>
-  Signed in as <%= current_user.email %> | <%= link_to "Logout", '/logout' %>
-<% else %>
-  <%= link_to 'Login', '/login' %> | <%= link_to 'Signup', '/signup' %>
-<% end %>
+    <ul class="navbar-nav">
+     <% if current_user %>
+      <li class="navbar-text"><%= current_user.email %></li>
+      <li><%= link_to "Logout", '/logout', class:"nav-link" %></li>
+     <% else %>
+      <li class="nav-item"><%= link_to 'Login', '/login', class:"nav-link" %></li>
+      <li class="nav-item"> <%= link_to 'Signup', '/signup', class:"nav-link" %></li>
+     <% end %>
   </div>
 </nav>
 <script>
