@@ -20,13 +20,14 @@ Rails.application.routes.draw do
     resources :categories, only: [:index, :new, :create]
   end
 
-  resources :users, only: [:create]
-  resources :sessions, only: [:create, :destroy]
-  #Aliases for common route names
-  get "/signup", to: "users#new"
-  get "/login", to: "sessions#new"
-  post "/sessions", to: "sessions#create"
-  delete "/sessions", to: "sesions#destroy"
+  resources :users, only: [:new, :create]
+  resources :sessions, only: [:new, :create, :destroy]
+  # Common aliases for login and logout routes
+  get '/logout' => 'sessions#destroy'
+  get "/login" => "sessions#new"
+  get "/signup" => "users#new"
+  # post "/sessions", to: "sessions#create"
+  # delete "/sessions", to: "sesions#destroy"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
