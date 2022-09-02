@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     @user = User.create(user_params)
     if @user.valid?
       @user.save
+      session[:user_id] = @user.id
       redirect_to '/'
     else  
       render :new
