@@ -7,7 +7,7 @@ RSpec.describe Product, type: :model do
       @category = Category.new(name: "Test Category")
       @category.save
       @product = Product.new(name: "Test Product", description: "This is a product to be tested", category_id: @category.id, quantity: 1, image: "not tested", price: 2000)
-      @product.save!
+      @product.save
 
       #Note: Price in Product creation is entered as dollars and converted to cents. Amount in Money.new is passed as cents directly (hence the extra two zeros)
       expect(@product).to have_attributes(name: "Test Product", description: "This is a product to be tested", category_id: @category.id, quantity: 1, price: Money.new(200000))
