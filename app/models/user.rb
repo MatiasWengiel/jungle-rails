@@ -2,10 +2,10 @@ class User < ApplicationRecord
   before_create :downcase_email
 
   has_secure_password
-  validates :email, presence: true, uniqueness: true
+  validates :email, presence: true, uniqueness: { case_sensitive: false }
   validates :password, :name, :last_name, presence: true
   validate :compare_password_and_confirmation
-  # validate :check_existing_email
+
 
   private
 
@@ -18,10 +18,5 @@ class User < ApplicationRecord
   def downcase_email
     self.email.downcase!
   end
-  # def check_existing_email
-  #   if User.find_by_email(:email.downcase)
-  #     errors.add("The email already exists. Go to the <a href='/login'> login page </a> in page if you wish to log in")
-  #   end
-  # end
-  
+
 end
