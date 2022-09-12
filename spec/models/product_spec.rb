@@ -20,7 +20,7 @@ RSpec.describe Product, type: :model do
       @product.save
 
       expect(@product).to_not be_valid
-      expect(@product.errors.messages[:name]). to eq ["can't be blank"]
+      expect(@product.errors.messages[:name]).to eq ["can't be blank"]
     end
 
     it 'validates the presence of a description' do
@@ -30,7 +30,7 @@ RSpec.describe Product, type: :model do
       @product.save
 
       expect(@product).to_not be_valid
-      expect(@product.errors.messages[:description]). to eq ["can't be blank"]
+      expect(@product.errors.messages[:description]).to eq ["can't be blank"]
     end
 
     it 'validates the presence of a category_id' do
@@ -40,7 +40,7 @@ RSpec.describe Product, type: :model do
       @product.save
 
       expect(@product).to_not be_valid
-      expect(@product.errors.messages[:category]). to eq ["must exist", "can't be blank"]
+      expect(@product.errors.messages[:category]).to eq ["must exist", "can't be blank"]
     end
 
     it 'validates the presence of a quantity' do
@@ -50,7 +50,7 @@ RSpec.describe Product, type: :model do
       @product.save
 
       expect(@product).to_not be_valid
-      expect(@product.errors.messages[:quantity]). to eq ["can't be blank", "is not a number"]
+      expect(@product.errors.messages[:quantity]).to eq ["can't be blank", "is not a number"]
     end
 
     #Not on requirements from Compass, but makes sense as the current UI allows for negative numbers to be entered, which is nonsensical. TODO: Fix UI
@@ -67,12 +67,12 @@ RSpec.describe Product, type: :model do
     it 'validates the presence of a price' do
       @category = Category.new(name: "Test Category")
       @category.save
-      @product = Product.new(name: "Test Product", description: "This is a product to be tested", category_id: @category.id, quantity: 1, image: "not tested", price: nil)
+      @product = Product.new(name: "Test Product", description: "This is a product to be tested", category_id: @category.id, quantity: 1, image: "not tested")
       @product.save
 
 
       expect(@product).to_not be_valid
-      expect(@product.errors.message[:price]).to eq[]
+      expect(@product.errors.messages[:price]).to eq ["is not a number", "can't be blank"]
     end
   end
 end
