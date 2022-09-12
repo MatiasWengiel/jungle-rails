@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+
   def new
     if session[:user_id]
       redirect_to '/'
@@ -24,6 +25,8 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :last_name, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :last_name, :email.downcase, :password, :password_confirmation)
   end
+
+
 end
