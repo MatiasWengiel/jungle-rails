@@ -5,6 +5,7 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: { case_sensitive: false }
   validates :password, :name, :last_name, presence: true
   validate :compare_password_and_confirmation
+  validates_length_of :password, minimum: 8 
 
 
   private
