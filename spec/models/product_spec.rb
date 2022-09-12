@@ -29,5 +29,14 @@ RSpec.describe Product, type: :model do
       expect(@product).to have_attributes(:category_id => @category.id)
     end
 
+    it 'validates the presence of a quantity' do
+      @category = Category.new(name: "Test Category")
+      @category.save
+      @product = Product.new(name: "Test Product", description: "This is a product to be tested", category_id: @category.id, quantity: 1, image: "../../db/seed_assets/apparel1.jpg", price: 2000)
+      @product.save!
+
+      expect(@product).to have_attributes(:quantity => 1)
+    end
+
   end
 end
