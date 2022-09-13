@@ -8,11 +8,14 @@ class SessionsController < ApplicationController
   end
 
   def create
+    #Downcase email and strip whitespace before validation (so it matches the downcased/stripped emails stored in database)
+    email = params[:email].downcase.strip
+    
     #Checks to see if user exists first
-    @user = User.find_by(email: params[:email])
+    @user = User.find_by(email: email)
 
     #If user exists, authenticate. If either fails, redirect to /login
-    if @user && User.authenticate_with_credentials(params[:email], params[:password])
+    if @user && User.authenticate_with_credentials(email, params[:password])
       session[:user_id] = @user.id
       redirect_to '/'
     elsif

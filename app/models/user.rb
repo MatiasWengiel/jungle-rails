@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  before_create :downcase_email
+  before_create :downcase_email_and_strip_whitespace
 
   has_secure_password
   validates :email, presence: true, uniqueness: { case_sensitive: false }
@@ -25,8 +25,9 @@ class User < ApplicationRecord
     end
   end
 
-  def downcase_email
-    self.email.downcase!
+  #Downcase all emails and strip whitespace before saving to the database, to avoid mixed case issues
+  def downcase_email_and_strip_whitespace
+    self.email.downcase!.strip!
   end
 
 end
