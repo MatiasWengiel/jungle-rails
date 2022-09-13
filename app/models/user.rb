@@ -9,11 +9,14 @@ class User < ApplicationRecord
 
   
   def self.authenticate_with_credentials(email, password)
+    #Downcase email and strip whitespace before validation (so it matches the downcased/stripped emails stored in database)
+    email = email.downcase.strip
+
     @user = User.find_by(email: email)
-    if @user.authenticate(password)
+    if @user && @user.authenticate(password)
       @user
     elsif
-      errors.add(:password, "No match, please confirm email and password")
+      # errors.add(:password, "No match, please confirm email and password")
       nil
     end
   end
