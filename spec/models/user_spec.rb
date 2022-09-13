@@ -62,12 +62,45 @@ RSpec.describe User, type: :model do
 
   describe '.authenticate_with_credentials' do
 
-it 'should pass with valid credentials' do
+    it 'should pass with valid credentials' do
       user = User.new(name: "Test Name", last_name: "Test Last Name", email: "test@email.com", password: "TestPassword", password_confirmation: "TestPassword")
       user.save!
 
       user = User.authenticate_with_credentials("test@email.com", "TestPassword")
       expect(user).not_to be(nil)
     end
+
+    it 'should fail if email is invalid' do
+      user = User.new(name: "Test Name", last_name: "Test Last Name", email: "test@email.com", password: "TestPassword", password_confirmation: "TestPassword")
+      user.save!
+
+      user = User.authenticate_with_credentials("wrong-test@email.com", "TestPassword")
+      expect(user).to be(nil)
+    end
+
+    it 'should fail if password is wrong' do
+      user = User.new(name: "Test Name", last_name: "Test Last Name", email: "test@email.com", password: "TestPassword", password_confirmation: "TestPassword")
+      user.save!
+
+      user = User.authenticate_with_credentials("test@email.com", "WrongPassword")
+      expect(user).to be(nil)
+    end
+
+    it 'should pass with valid credentials, even if there are extra spaces in the entered email' do
+      user = User.new(name: "Test Name", last_name: "Test Last Name", email: "test@email.com", password: "TestPassword", password_confirmation: "TestPassword")
+      user.save!
+
+      user = User.authenticate_with_credentials("   test@email.com   ", "TestPassword")
+      expect(user).not_to be(nil)
+    end
+    
+    it 'should pass with valid credentials, even if there are capital letters in the entered email' do
+      user = User.new(name: "Test Name", last_name: "Test Last Name", email: "test@email.com", password: "TestPassword", password_confirmation: "TestPassword")
+      user.save!
+
+      user = User.authenticate_with_credentials("TEST@email.com", "TestPassword")
+      expect(user).not_to be(nil)
+    end
+
   end
 end
