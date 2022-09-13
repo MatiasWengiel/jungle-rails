@@ -7,6 +7,11 @@ class User < ApplicationRecord
   validate :compare_password_and_confirmation
   validates_length_of :password, minimum: 8 
 
+  
+  def authenticate_with_credentials(email, password)
+    @user = User.find_by(email: email)
+    self.authenticate(password)
+  end
 
   private
 
