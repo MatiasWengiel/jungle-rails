@@ -8,9 +8,13 @@ class User < ApplicationRecord
   validates_length_of :password, minimum: 8 
 
   
-  def authenticate_with_credentials(email, password)
+  def self.authenticate_with_credentials(email, password)
     @user = User.find_by(email: email)
-    self.authenticate(password)
+    if @user.authenticate(password)
+      @user
+    elsif
+      nil
+    end
   end
 
   private
