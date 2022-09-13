@@ -13,6 +13,7 @@ class User < ApplicationRecord
     if @user.authenticate(password)
       @user
     elsif
+      errors.add(:password, "No match, please confirm email and password")
       nil
     end
   end
@@ -27,7 +28,8 @@ class User < ApplicationRecord
 
   #Downcase all emails and strip whitespace before saving to the database, to avoid mixed case issues
   def downcase_email_and_strip_whitespace
-    self.email.downcase!.strip!
+    self.email.downcase!
+    self.email.strip!
   end
 
 end
