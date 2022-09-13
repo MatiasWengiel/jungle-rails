@@ -6,7 +6,8 @@ RSpec.describe User, type: :model do
     it 'validates a new user can be properly created' do
       @user = User.new(name: "Test Name", last_name: "Test Last Name", email: "test@email.com", password: "TestPassword", password_confirmation: "TestPassword")
       @user.save
-
+      
+      expect(@user).to be_valid
       expect(@user).to have_attributes(name: "Test Name", last_name: "Test Last Name", email: "test@email.com", password: "TestPassword", password_confirmation: "TestPassword")
     end
 
@@ -56,6 +57,17 @@ RSpec.describe User, type: :model do
       @user.save
 
       expect(@user.errors.messages[:password]).to eq ["is too short (minimum is 8 characters)"]
+    end
+  end
+
+  describe '.authenticate_with_credentials' do
+
+it 'should pass with valid credentials' do
+      user = User.new(name: "Test Name", last_name: "Test Last Name", email: "test@email.com", password: "TestPassword", password_confirmation: "TestPassword")
+      user.save!
+
+      user = User.authenticate_with_credentials("test@email.com", "TestPassword")
+      expect(user).not_to be(nil)
     end
   end
 end
